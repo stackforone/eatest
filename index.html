@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>ศูนย์ควบคุม</title>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .page {
+            display: none;
+        }
+        /* ตั้งค่าให้หน้าแรกแสดงเมื่อเปิดเว็บ */
+        #home-page {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+     
+    <!-- หน้าแรก -->
+<div class="page" id="home-page">
+    <div class="header">
+        <div class="header-content">
+            <div class="header-image">
+                <img src="head.jpg" alt="Image Description">
+            </div>
+        </div>
+    </div>
+
+    <section class="services">
+        <div class="service">
+            <p>ปัก บริการออนไลน์</p>
+        </div>
+        <div class="service">
+            <p>การเทรดเก่าๆ</p>
+        </div>
+        <div class="service">
+            <p>ฝ่ายบริการลูกค้า</p>
+        </div>
+    </section>
+
+    <nav class="tabs">
+        <button id="tab1" class="tab active" onclick="showTab('currencyControl')" style="font-family: 'Kanit', sans-serif; font-size: 13px;">ระบบควบคุมเคอร์เรนซี</button>
+        <button id="tab2" class="tab" onclick="showTab('forex')" style="font-family: 'Kanit', sans-serif; font-size: 13px;">ฟอเร็กซ์</button>
+    </nav>
+
+    <div id="currencyControl" class="tab-content active">
+        <div class="sub-tabs">
+            <button class="active" style="font-family: 'Kanit', sans-serif; font-size: 12px;">คู่</button>
+            <button class="active" style="font-family: 'Kanit', sans-serif; font-size: 12px;">กราฟ</button>
+            <button class="active" style="font-family: 'Kanit', sans-serif; font-size: 12px;">ราคาล่าสุด</button>
+        </div>
+        <section class="market-data">
+            <div class="market-item">
+                <div class="crypto-icon"><img src="bitcoin-cryptocurrency.svg" alt="BTC"></div>
+                <div class="crypto-details">
+                    <p class="crypto-name">บีทีซี/ดอลลาร์สหรัฐ</p>
+                    <p class="crypto-volume">เล่มที่: 61015.60</p>
+                </div>
+                <p class="crypto-price">61015.60 <span class="crypto-change">-3.428%</span></p>
+            </div>
+            <div class="market-item">
+                <div class="crypto-icon"><img src="ethereum-cryptocurrency.svg" alt="ETH"></div>
+                <div class="crypto-details">
+                    <p class="crypto-name">อีทีเอช/ดอลลาร์สหรัฐ</p>
+                    <p class="crypto-volume">เล่มที่: 2676.43</p>
+                </div>
+                <p class="crypto-price">2676.43 <span class="crypto-change">-1.350%</span></p>
+            </div>
+            <div class="market-item">
+                <div class="crypto-icon"><img src="eos-svgrepo-com.svg" alt="EOS"></div>
+                <div class="crypto-details">
+                    <p class="crypto-name">อีโอเอส/ดอลลาร์สหรัฐ</p>
+                    <p class="crypto-volume">เล่มที่: 0.489</p>
+                </div>
+                <p class="crypto-price">0.489 <span class="crypto-change">-1.022%</span></p>
+            </div>
+            <div class="market-item">
+                <div class="crypto-icon"><img src="bch-svgrepo-com.svg" alt="BCH"></div>
+                <div class="crypto-details">
+                    <p class="crypto-name">บีซีเอช/ดอลลาร์สหรัฐ</p>
+                    <p class="crypto-volume">เล่มที่: 353.09</p>
+                </div>
+                <p class="crypto-price">353.09 <span class="crypto-change">-2.303%</span></p>
+            </div>
+        </section>
+    </div>
+</div>
+
+
+    <!-- หน้าเทรด -->
+    <div class="page" id="trade-page">
+        <div class="trade-header">
+            <h2></h2>
+            <p></p>
+        </div>
+
+        <div class="trading-view">
+            <!-- TradingView Widget BEGIN -->
+            <div class="tradingview-widget-container">
+                <div id="tradingview_btc_chart"></div>
+                <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+                <script type="text/javascript">
+                    new TradingView.widget({
+                        "container_id": "tradingview_btc_chart",
+                        "autosize": true,
+                        "symbol": "BINANCE:BTCUSDT",
+                        "interval": "30",
+                        "timezone": "Asia/Bangkok",
+                        "theme": "dark",
+                        "style": "1",
+                        "locale": "th",
+                        "toolbar_bg": "#f1f3f6",
+                        "enable_publishing": false,
+                        "hide_side_toolbar": false,
+                        "allow_symbol_change": true,
+                        "details": true,
+                        "studies": [
+                            "RSI@tv-basicstudies"
+                        ],
+                        "show_popup_button": true,
+                        "popup_width": "1000",
+                        "popup_height": "650"
+                    });
+                </script>
+            </div>
+            <!-- TradingView Widget END -->
+        </div>
+
+        <div class="trade-buttons">
+        <button class="buy-button" onclick="openModal()">ใส่</button>
+        <button class="sell-button">เรียก</button>
+    </div>
+
+    <div id="modalScreen" class="modal">
+        <div class="modal-content">
+            <p>ปักคอยน์ USDT</p>
+            <div class="coin-buttons">
+                <button style="font-family: 'Kanit', sans-serif;">100 เหรียญสหรัฐ</button>
+                <button style="font-family: 'Kanit', sans-serif;">200 เหรียญสหรัฐ</button>
+                <button style="font-family: 'Kanit', sans-serif;">500 เหรียญสหรัฐ</button>
+                <button style="font-family: 'Kanit', sans-serif;">1,000 เหรียญสหรัฐ</button>
+            </div>
+            <div class="reward-buttons">
+                <button style="font-family: 'Kanit', sans-serif;">30 ช. 15.00%</button>
+                <button style="font-family: 'Kanit', sans-serif;">60 ชั่วโมง 20.00%</button>
+                <button style="font-family: 'Kanit', sans-serif;">90 ชั่วโมง 30.00%</button>
+                <button style="font-family: 'Kanit', sans-serif;">120 ณ 50.00%</button>
+            </div>
+            <button id="submitBtn" style="font-family: 'Kanit', sans-serif;">ลงชื่อเข้าใช้</button>
+            <button class="close" onclick="closeModal()" style="font-family: 'Kanit', sans-serif;">ปิด</button>
+        </div>
+    </div>
+
+    <script>
+        // ฟังก์ชันเพื่อแสดง modal
+        function openModal() {
+            document.getElementById("modalScreen").style.display = "flex";
+        }
+
+        // ฟังก์ชันเพื่อซ่อน modal
+        function closeModal() {
+            document.getElementById("modalScreen").style.display = "none";
+        }
+    </script>
+        
+        <div class="more-options">
+            <button class="more-button">
+            <i class="fas fa-ellipsis-h"></i> มากกว่า
+        </button>
+        <button class="alert-button">
+            <i class="fas fa-bell"></i> เตือน
+        </button>
+        </div>
+    </div>
+
+    <!-- หน้าประวัติ -->
+    <div class="page" id="history-page">
+        <div class="header">
+            <h2>สัญญา ฝากเหรียญ</h2>
+            <p>โปรดศึกษารายละเอียด นโยบาย ข้อมูล และความเสี่ยงของกองทุน</p>
+        </div>
+        <div class="content">
+            <h3>เหรียญทั้งหมดของคุณ</h3>
+            <div class="coin-card">
+                <img src="https://cdn.bitkubnow.com/coins/icon/32/BNB.png" alt="BNB">
+                <div class="coin-info">
+                    <p>BNB</p>
+                    <p>Total: 0.00000 BNB</p>
+                    <p>In Order: 0.00000 BNB</p>
+                </div>
+                <button style="font-family: 'Kanit', sans-serif;">ฝากเหรียญ</button>
+            </div>
+            <div class="coin-card">
+                <img src="bitcoin-cryptocurrency.svg" alt="BTC">
+                <div class="coin-info">
+                    <p>BTC</p>
+                    <p>Total: 0.00000 BTC</p>
+                    <p>In Order: 0.00000 BTC</p>
+                </div>
+                <button style="font-family: 'Kanit', sans-serif;">ฝากเหรียญ</button>
+            </div>
+            <div class="coin-card">
+                <img src="ethereum-cryptocurrency.svg" alt="ETH">
+                <div class="coin-info">
+                    <p>ETH</p>
+                    <p>Total: 0.00000 ETH</p>
+                    <p>In Order: 0.00000 ETH</p>
+                </div>
+                <button style="font-family: 'Kanit', sans-serif;">ฝากเหรียญ</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- หน้ากระเป๋า -->
+    <div class="page" id="wallet-page">
+        <div class="header">
+            <h2>กระเป๋า</h2>
+            <p>ทรัพย์สิน (USDT)</p>
+            <h3>0 USDT</h3>
+            <p>฿0.00 THB</p>
+            <p>ข้อมูล ณ : 10:07:21</p>
+        </div>
+
+        <div class="icon-grid">
+            <div class="icon-item">
+                <i class="fas fa-university"></i>
+                <p>ผูกบัญชีธนาคาร</p>
+                <p class="status" style="color:red;">ไม่ได้ระบุ</p>
+            </div>
+            <div class="icon-item">
+                <i class="fas fa-wallet"></i>
+                <p>ซื้อเหรียญ</p>
+            </div>
+            <div class="icon-item">
+                <i class="fas fa-wallet"></i>
+                <p>ฝากเหรียญ</p>
+            </div>
+            <div class="icon-item">
+                <i class="fas fa-money-bill-alt"></i>
+                <p>ถอนเงิน THB</p>
+            </div>
+            <div class="icon-item">
+                <i class="fas fa-money-bill-alt"></i>
+                <p>ถอนเงิน USDT</p>
+            </div>
+            <div class="icon-item">
+                <i class="fas fa-list-alt"></i>
+                <p>รายการถอนเงิน/เติมเงิน</p>
+            </div>
+        </div>
+
+        <div>
+            <h4>เหรียญทั้งหมดของคุณ</h4>
+            <div style="background-color: #333; padding: 10px; margin-bottom: 10px; border-radius: 8px;">
+                <p>USDT</p>
+                <p>Total: 0 USDT</p>
+                <p>Available: 0 USDT</p>
+                <p>In Order: 0.00 USDT</p>
+            </div>
+            <div style="background-color: #333; padding: 10px; border-radius: 8px;">
+                <p>BTC</p>
+                <p>Total: 0.000000 BTC</p>
+                <p>In Order: 0.000000 BTC</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- หน้าศูนย์บุคคล -->
+    <div class="page" id="profile-page">
+        <div class="header-container"></div>
+        <div class="header">
+            <h2>ศูนย์บุคคล</h2>
+            <p>ชื่อ ฟีม ปิยะพงษ์</p>
+            <p>ยูเซอร์เนม ff00</p>
+            <p>รหัส 78888</p>
+            <img src="thai.jpg" alt="โลโก้ไทย" class="flag-icon">
+        </div>
+
+        <div class="content">
+            <div class="icon-grid">
+                <div class="icon-item">
+                    <img src="pp.png">
+                    <p>ยืนยันตัวตน v1</p>
+                    <p class="status1">สำเร็จเเล้ว</p>
+                </div>
+                <div class="icon-item">
+                    <img src="pp.png">
+                    <p>ยืนยันตัวตน v2</p>
+                    <p class="status">สำเร็จเเล้ว</p>
+                </div>
+                <div class="icon-item">
+                    <img src="pp2.png">
+                    <p>ประวัติการเทรด</p>
+                </div>
+                <div class="icon-item">
+                    <img src="pp3.png">
+                    <p>ฝ่ายบริการลูกค้า</p>
+                </div>
+                <div class="icon-item">
+                    <img src="pp4.png">
+                    <p>ติดต่อ Line</p>
+                </div>
+                <div class="icon-item">
+                    <img src="pp5.png">
+                    <p>ติดต่ออีเมล์</p>
+                </div>
+                <div class="icon-item">
+                    <img src="pp6.png">
+                    <p>โหลดแอพฯ</p>
+                </div>
+                <div class="icon-item" onclick="showPage('management-page')">
+                    <i class="fas fa-gavel"></i>
+                    <p>ระบบบริหารจัดการ</p>
+                </div>
+                <div class="icon-item">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <p>ออกจากระบบ</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+     
+       <!-- หน้าระบบบริหารจัดการ -->
+<div class="page" id="management-page">
+    <!-- Wrapper ที่ครอบคลุมเฉพาะเนื้อหาที่จะเบลอ -->
+    <div id="content-wrapper">
+        <!-- ข้อความที่อยู่ด้านบนซ้าย -->
+        <div class="management-header">
+            <h2>ข่าวสาร</h2>
+            <p>ไม่พบข่าวสาร</p>
+        </div>
+
+        <!-- ไอคอน 3 ขีดมุมขวาบน -->
+        <button class="menu-toggle" onclick="toggleMenu()">
+            <i class="fas fa-bars"></i>
+        </button>
+
+        <!-- ไอคอนลอยทางซ้ายล่าง -->
+        <button class="floating-button" onclick="toggleSlideMenu()">
+            <i class="fas fa-arrow-left"></i>
+        </button>
+    </div>
+
+    <!-- เมนูสไลด์ออกมาจากด้านซ้าย -->
+    <div id="slide-menu" class="slide-menu">
+        <ul>
+            <li><i class="fas fa-chart-pie"></i> แดชบอร์ด <span class="arrow">&#9660;</span></li>
+            <li><i class="fas fa-users"></i> เกี่ยวกับลูกค้า <span class="arrow">&#9660;</span></li>
+            <li><i class="fas fa-coins"></i> เกี่ยวกับเทรด <span class="arrow">&#9660;</span></li>
+            <li><i class="fas fa-exchange-alt"></i> ระบบฝาก/ถอน <span class="arrow">&#9660;</span></li>
+            <li><i class="fas fa-comments"></i> ระบบแชท <span class="arrow">&#9660;</span></li>
+            <li><i class="fas fa-cogs"></i> ตั้งค่าระบบเว็บ <span class="arrow">&#9660;</span></li>
+    </button>
+    <div class="accordion-content" id="settings-menu">
+        <p>ตั้งค่า Prefix</p>
+        <p>ตั้งค่าโลโก้ & ธีม & แชท</p>
+        <p>ตั้งค่า Top Graphic</p>
+        <p>ตั้งค่า Popup</p>
+        <p>ตั้งค่า เทรด</p>
+        <p>ตั้งค่า โหลดแอพ</p>
+        <p>ตั้งค่า ช่องทางเติมเงิน</p>
+    </div>
+</li>
+        </ul>
+        <button class="close-button" onclick="toggleSlideMenu()">
+            <i class="fas fa-arrow-right"></i>
+        </button>
+    </div>
+</div>
+
+<!-- เมนูด้านล่าง -->
+<div class="bottom-nav">
+    <a href="#home-page" class="active" onclick="showPage('home-page')">
+        <i class="fas fa-home"></i>
+        หน้าแรก
+    </a>
+    <a href="#trade-page" onclick="showPage('trade-page')">
+        <i class="fas fa-dollar-sign"></i>
+        ซื้อขาย
+    </a>
+    <a href="#history-page" onclick="showPage('history-page')">
+        <i class="fas fa-file-alt"></i>
+        เครื่องหมาย
+    </a>
+    <a href="#wallet-page" onclick="showPage('wallet-page')">
+        <i class="fas fa-wallet"></i>
+        กระเป๋า
+    </a>
+    <a href="#profile-page" onclick="showPage('profile-page')">
+        <i class="fas fa-user"></i>
+        ศูนย์บุคคล
+    </a>
+</div>
+
+<!-- สคริปต์จัดการการทำงาน -->
+<script>
+    function showPage(pageId) {
+    var pages = document.querySelectorAll('.page');
+    pages.forEach(function(page) {
+        page.style.display = 'none';
+    });
+
+    // แสดงหน้าที่ต้องการ
+    document.getElementById(pageId).style.display = 'block';
+
+    // ลบ class active จากทุกลิงก์
+    var navLinks = document.querySelectorAll('.bottom-nav a');
+    navLinks.forEach(function(nav) {
+        nav.classList.remove('active');
+    });
+
+    // เพิ่ม class active ให้กับลิงก์ที่สอดคล้องกับหน้าที่แสดง
+    var activeLink = document.querySelector(`.bottom-nav a[href="#${pageId}"]`);
+    if (activeLink) {
+        activeLink.classList.add('active');
+    }
+}
+
+    function toggleSlideMenu() {
+        const menu = document.getElementById('slide-menu');
+        const contentWrapper = document.getElementById('content-wrapper');
+        
+        if (menu.classList.contains('active')) {
+            menu.classList.remove('active');
+            contentWrapper.classList.remove('blur-background');
+        } else {
+            menu.classList.add('active');
+            contentWrapper.classList.add('blur-background');
+        }
+    }
+    
+    function toggleAccordion(menuId) {
+    const content = document.getElementById(menuId);
+    const header = content.previousElementSibling;
+
+    // ซ่อนเมนูย่อยอื่นๆ
+    document.querySelectorAll('.accordion-content').forEach(item => {
+        if (item !== content) {
+            item.style.display = 'none';
+            item.previousElementSibling.classList.remove('active');
+        }
+    });
+
+    // เปิดหรือปิดเมนูที่เลือก
+    if (content.style.display === "block") {
+        content.style.display = "none";
+        header.classList.remove('active');
+    } else {
+        content.style.display = "block";
+        header.classList.add('active');
+    }
+}
+
+    function toggleAccordion(id) {
+    var content = document.getElementById(id);
+    var arrow = content.previousElementSibling.querySelector('.arrow');
+
+    if (content.style.display === "block") {
+        content.style.display = "none";
+        arrow.innerHTML = "&#9660;"; // เปลี่ยนเป็นลูกศรลง
+    } else {
+        content.style.display = "block";
+        arrow.innerHTML = "&#9650;"; // เปลี่ยนเป็นลูกศรขึ้น
+    }
+}
+
+   type="text/javascript">
+    new TradingView.widget({
+        "container_id": "tradingview_btc_chart",
+        "width": "100%",
+        "height": "550", /* ปรับขนาดให้ตรงกับ CSS */
+        "symbol": "BINANCE:BTCUSDT",
+        "interval": "30",
+        "timezone": "Asia/Bangkok",
+        "theme": "dark",
+        "style": "1",
+        "locale": "th",
+        "toolbar_bg": "#f1f3f6",
+        "enable_publishing": false,
+        "hide_side_toolbar": false,
+        "allow_symbol_change": true,
+        "details": true,
+        "studies": [
+            "RSI@tv-basicstudies"
+        ],
+        "show_popup_button": true,
+        "popup_width": "1000",
+        "popup_height": "650"
+    });
+</script>
+</body>
+</html>
